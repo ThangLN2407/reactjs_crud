@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./assets/libs/bstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/libs/bstrap/fontawesome.min.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <h1>CURD-REACT JS</h1>
+        </div>
+        <div class="row">
+            <div class="row">
+                <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="card text-white bg-secondary mb-3">
+                        <div class="card-header">Create item</div>
+                        <div class="card-body">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="email" class="form-control" 
+                                    />
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Main</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Have read?</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-primary">Cancel</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                    <div class="row">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <button type="button" class="btn btn-primary"> <i class="bi bi-plus-lg"></i> Create
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row mt-20">
+                        <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7">
+                            <form>
+                                <div class="row">
+                                    <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8">
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            placeholder="Search..." />
+                                    </div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                        <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i>
+                                            Search</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+                            <button type="button" class="btn btn-primary">Sort alpha down <i
+                                    class="bi bi-sort-alpha-down"></i></button>
+                            <button type="button" class="btn btn-primary">Sort alpha up <i
+                                    class="bi bi-sort-alpha-up"></i></button>
+                        </div>
+                    </div>
+                    <div class="row mt-20">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Index</th>
+                                        <th>Name</th>
+                                        <th>Main</th>
+                                        <th>Status</th>
+                                        <th></th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Phàm nhân tu tiên</td>
+                                        <td>Hàn Lập</td>
+                                        <td> <span class="badge badge-success bg-success text-white">Read</span> </td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning"><i
+                                                    class="bi bi-pencil-square"></i> Edit</button>
+                                            <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i>
+                                                Delete</button>
+                                        </td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Yêu thần ký</td>
+                                        <td>Nhiếp Ly</td>
+                                        <td> <span class="badge badge-danger bg-danger text-white">Un Read</span> </td>
+                                        <td>
+                                            <button type="button" class="btn btn-warning"><i
+                                                    class="bi bi-pencil-square"></i> Edit</button>
+                                            <button type="button" class="btn btn-danger"><i class="bi bi-trash"></i>
+                                                Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./assets/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/bootstrap.min.js"></script>
+</body>
+
+</html>
