@@ -5,4 +5,5 @@ h1 {
 .close-right {
   display: inline-block;
   float: right;
+  cursor: pointer;
 }

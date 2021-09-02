@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import Item from './Item';
+import Item from "./Item";
 
 class TableItems extends Component {
+
+
   render() {
+    const { listItems } = this.props;
+
+    const elmItem = listItems.map((item, index) => {
+      return <Item key={item.id} index={index} item={item}/>;
+    });
     return (
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
@@ -15,12 +22,7 @@ class TableItems extends Component {
               <th></th>
             </tr>
           </thead>
-          <tbody>
-           <Item />
-           <Item />
-           <Item />
-           <Item />
-          </tbody>
+          <tbody>{elmItem}</tbody>
         </table>
       </div>
     );

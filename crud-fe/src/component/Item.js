@@ -2,16 +2,23 @@ import React, { Component } from "react";
 
 class Item extends Component {
   render() {
+    const { index, item } = this.props;
+
     return (
       <tr>
-        <td>2</td>
-        <td>Yêu thần ký</td>
-        <td>Nhiếp Ly</td>
+        <td>{index + 1}</td>
+        <td>{item.name}</td>
+        <td>{item.main}</td>
         <td>
-          {" "}
-          <span className="badge badge-danger bg-danger text-white">
-            Un Read
-          </span>{" "}
+          {item.status ? (
+            <span className="badge bg-success text-white">
+              Read
+            </span>
+          ) : (
+            <span className="badge bg-danger text-white">
+              Un Read
+            </span>
+          )}
         </td>
         <td>
           <button type="button" className="btn btn-warning">
