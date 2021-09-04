@@ -13,18 +13,38 @@ class App extends Component {
     this.state = {
       isDisplayForm: false,
       listItems: [],
+      itemUpdate: {},
     };
   }
 
   toggleForm = () => {
     this.setState({
-      isDisplayForm: !this.state.isDisplayForm,
+      isDisplayForm: true,
+      itemUpdate: {
+        id: "",
+        name: "",
+        main: "",
+        status: false,
+      },
     });
   };
 
   onCloseForm = () => {
-    
-    this.toggleForm();
+    this.setState({
+      isDisplayForm: false,
+      itemUpdate: {
+        id: "",
+        name: "",
+        main: "",
+        status: false,
+      },
+    });
+  };
+
+  onShowForm = () => {
+    this.setState({
+      isDisplayForm: true,
+    });
   };
 
   generateData = () => {
@@ -62,27 +82,67 @@ class App extends Component {
   }
 
   onSubmitForm = (dataNewItem) => {
-    const {listItems} = this.state;
-    const data = {
-      id: uuidv4(),
-      name: dataNewItem.name,
-      main: dataNewItem.main,
-      status: dataNewItem.status,
+    const { listItems } = this.state;
+    if (dataNewItem.name !== "") {
+      // create
+      if (dataNewItem.id === "") {
+        const data = {
+          id: uuidv4(),
+          name: dataNewItem.name,
+          main: dataNewItem.main,
+          status: dataNewItem.status,
+        };
+        listItems.push(data);
+      } else {
+        //update
+        const { listItems } = this.state;
+        const indexOfItem = listItems.findIndex((item) => { return (item.id === dataNewItem.id) });
+        // const indexOfItem = listItems.findIndex(item => item.id === dataNewItem.id)
+        listItems[indexOfItem] = dataNewItem;
+      }
+
+      localStorage.setItem("data", JSON.stringify(listItems));
+      this.setState({
+        listItems: listItems,
+      });
     }
-    listItems.push(data)
-    this.setState({
-      listItems: listItems
-    })
-    localStorage.setItem("data", JSON.stringify(listItems));
+
     this.onCloseForm();
   };
 
-  
+  onDeleteItem = (idItem) => {
+    const newList = this.state.listItems.filter((item) => item.id !== idItem);
+    localStorage.setItem("data", JSON.stringify(newList));
+    this.setState({
+      listItems: JSON.parse(localStorage.getItem("data")),
+    });
+  };
+
+  onEditItem = (idItem) => {
+    const { listItems } = this.state;
+    const itemSelected = listItems.find((item) => item.id === idItem);
+    this.setState({
+      itemUpdate: itemSelected,
+    });
+
+    this.onShowForm();
+  };
+
+  componentDidUpdate() {
+    if (JSON.parse(localStorage.getItem("data")).length === 0) {
+      localStorage.removeItem("data");
+    }
+  }
+
   render() {
-    const createForm = this.state.isDisplayForm ? (
+    const { listItems, isDisplayForm, itemUpdate } = this.state;
+
+  
+    const createForm = isDisplayForm ? (
       <CreateItem
         onCloseFormPr={this.onCloseForm}
         getNewItem={this.onSubmitForm}
+        itemUpdate={itemUpdate}
       />
     ) : (
       ""
@@ -97,16 +157,14 @@ class App extends Component {
           <div className="row">
             <div
               className={
-                this.state.isDisplayForm
-                  ? "col-xs-4 col-sm-4 col-md-4 col-lg-4"
-                  : ""
+                isDisplayForm ? "col-xs-4 col-sm-4 col-md-4 col-lg-4" : ""
               }
             >
               {createForm}
             </div>
             <div
               className={
-                this.state.isDisplayForm
+                isDisplayForm
                   ? "col-xs-8 col-sm-8 col-md-8 col-lg-8"
                   : "col-xs-12 col-sm-12 col-md-12 col-lg-12"
               }
@@ -124,7 +182,11 @@ class App extends Component {
               </div>
               <Control />
               <div className="row mt-20">
-                <TableItems listItems={this.state.listItems} />
+                <TableItems
+                  listItems={listItems}
+                  onEditItemPr={this.onEditItem}
+                  onDeleteItemPr={this.onDeleteItem}
+                />
               </div>
             </div>
           </div>

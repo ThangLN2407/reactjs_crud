@@ -2,13 +2,27 @@ import React, { Component } from "react";
 import Item from "./Item";
 
 class TableItems extends Component {
+  onDeleteItem = (id) => {
+    this.props.onDeleteItemPr(id);
+  };
 
-
+  onEditItem = (id) => {
+    this.props.onEditItemPr(id);
+  };
+  
   render() {
     const { listItems } = this.props;
 
     const elmItem = listItems.map((item, index) => {
-      return <Item key={item.id} index={index} item={item}/>;
+      return (
+        <Item
+          key={item.id}
+          index={index}
+          item={item}
+          onEditItem={this.onEditItem}
+          onDeleteItem={this.onDeleteItem}
+        />
+      );
     });
     return (
       <div className="table-responsive">
