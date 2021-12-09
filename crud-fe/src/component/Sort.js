@@ -9,15 +9,22 @@ class Sort extends Component {
     };
   }
 
+  onClickBtn = (name, value) => {
+    this.setState({
+      isUp: !this.state.isUp
+    })
+    console.log(name, value)
+  }
+
   render() {
     const { isUp } = this.state;
 
     const showBtn = isUp ? (
-      <button type="button" className="btn btn-primary">
+      <button type="button" className="btn btn-primary" onClick ={() => {this.onClickBtn('name', true)}}>
         Sort alpha up <i className="bi bi-sort-alpha-up"></i>
       </button>
     ) : (
-      <button type="button" className="btn btn-primary">
+      <button type="button" className="btn btn-primary" onClick ={() => {this.onClickBtn('name', false)}}>
         Sort alpha down <i className="bi bi-sort-alpha-down"></i>
       </button>
     );

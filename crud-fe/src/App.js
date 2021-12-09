@@ -14,6 +14,12 @@ class App extends Component {
       isDisplayForm: false,
       listItems: [],
       itemUpdate: {},
+      dataFilter: {
+        name: "",
+        main: "",
+        status: -1,
+      },
+      keyword:'',
     };
   }
 
@@ -96,7 +102,9 @@ class App extends Component {
       } else {
         //update
         const { listItems } = this.state;
-        const indexOfItem = listItems.findIndex((item) => { return (item.id === dataNewItem.id) });
+        const indexOfItem = listItems.findIndex((item) => {
+          return item.id === dataNewItem.id;
+        });
         // const indexOfItem = listItems.findIndex(item => item.id === dataNewItem.id)
         listItems[indexOfItem] = dataNewItem;
       }
@@ -134,10 +142,52 @@ class App extends Component {
     }
   }
 
-  render() {
-    const { listItems, isDisplayForm, itemUpdate } = this.state;
+  onFilter = (filterName, filterMain, filterStatus) => {
+    this.setState({
+      dataFilter: {
+        name: filterName.toLowerCase(),
+        main: filterMain.toLowerCase(),
+        status: filterStatus,
+      },
+    });
+  };
 
-  
+  onSearch = (keyword) => {
+    this.setState({
+      keyword: keyword
+    })
+  }
+
+  render() {
+    const { isDisplayForm, itemUpdate, dataFilter } = this.state;
+    let { listItems, keyword } = this.state;
+
+    if (dataFilter) {
+      if (dataFilter.name) {
+        listItems = listItems.filter((item) => {
+          return item.name.toLowerCase().indexOf(dataFilter.name) !== -1;
+        });
+      }
+      if (dataFilter.main) {
+        listItems = listItems.filter((item) => {
+          return item.main.toLowerCase().indexOf(dataFilter.main) !== -1;
+        });
+      }
+      listItems = listItems.filter((item) => {
+        if(dataFilter.status === -1){
+          return listItems
+        }else{
+          return item.status === (dataFilter.status === 0 ? true: false)
+        }
+      })
+    }
+
+    if(keyword){
+      listItems = listItems.filter((item) => {
+        return item.name.toLowerCase().indexOf(keyword) !== -1;
+      });
+    }
+
     const createForm = isDisplayForm ? (
       <CreateItem
         onCloseFormPr={this.onCloseForm}
@@ -180,12 +230,13 @@ class App extends Component {
                   </button>
                 </div>
               </div>
-              <Control />
+              <Control  onSearch={this.onSearch} />
               <div className="row mt-20">
                 <TableItems
                   listItems={listItems}
                   onEditItemPr={this.onEditItem}
                   onDeleteItemPr={this.onDeleteItem}
+                  onFilterItemPr={this.onFilter}
                 />
               </div>
             </div>

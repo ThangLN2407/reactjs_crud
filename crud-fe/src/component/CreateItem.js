@@ -36,8 +36,6 @@ class CreateItem extends Component {
   };
 
   componentDidMount(){
-    // console.log('itemUpdate 1',this.props.itemUpdate)
-
     if(this.props.itemUpdate.id){
       this.setState({
         id: this.props.itemUpdate.id,
@@ -50,7 +48,6 @@ class CreateItem extends Component {
   }
 
   componentDidUpdate(){
-    // console.log('itemUpdate 2',this.props.itemUpdate)
     if(this.props.itemUpdate.id !== this.state.lastId){
       this.setState({
         id: this.props.itemUpdate.id,
